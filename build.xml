@@ -3,7 +3,7 @@
 
     <!-- paths used for compilation and run  -->
     <path id="lib.path.id">
-        <fileset dir="${lib.dir}" />
+        <fileset dir="${jars.dir}" />
 	</path>
     <path id="run.path.id">
         <path refid="lib.path.id" />
@@ -15,6 +15,10 @@
          ================================= -->
     <target name="build" description="Compiles the project">
         <mkdir dir="${build.dir}" />
+        <mkdir dir="${jars.dir}" />
+        <copy todir="${jars.dir}">
+            <fileset dir="${lib.src.dir}"/>
+        </copy>
         <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="lib.path.id" includeAntRuntime="false"/>
     </target>
 
@@ -33,6 +37,7 @@
     <target name="clean" description="Cleans the project">
         <delete includeemptydirs="true">
             <fileset dir="${build.dir}"></fileset>
+            <fileset dir="${jars.dir}"></fileset>
     	</delete>
     </target>
 
